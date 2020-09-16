@@ -5,4 +5,5 @@ files:
     destination: /tmp/
 ApplicationStart:
   - location: scripts/start_application.sh
+    timeout: 30
     runas: root
