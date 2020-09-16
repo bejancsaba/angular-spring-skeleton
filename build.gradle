@@ -8,7 +8,6 @@ buildscript {
 		//maven { url 'http://jcenter.bintray.com' }
 	}
 	dependencies {
-		//classpath 'com.moowork.gradle:gradle-node-plugin:1.2.0'
 		classpath("com.github.node-gradle:gradle-node-plugin:3.0.0-rc2")
 		classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
 		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
@@ -16,7 +15,6 @@ buildscript {
 }
 
 plugins {
-	//id 'com.github.node-gradle.node")
 	id 'org.springframework.boot' version '2.3.3.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'

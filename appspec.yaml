@@ -1,0 +1,7 @@
+os: linux
+files:
+  - source: build/libs/demo-0.0.1-SNAPSHOT.jar
+    destination: /tmp/
+ApplicationStart:
+  - location: scripts/start_application.sh
+    runas: root
