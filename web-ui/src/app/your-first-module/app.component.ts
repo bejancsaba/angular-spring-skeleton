@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { HttpParams, HttpClient } from '@angular/common/http';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { HttpParams, HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
+  persons: Person[];
   title = 'UI demo app';
   clickMessage = '';
 
@@ -25,8 +27,37 @@ export class AppComponent {
         error => this.clickMessage = error.json
       );
   }
+
+  onPersist(name: HTMLInputElement, age: HTMLInputElement) {
+    this.http.post<Person>("/person", new Person(name.value, age.value))
+        .subscribe(
+            response  => {
+              this.clickMessage = 'Persisted!';
+              name.value = '';
+              age.value = '';
+            },
+            error => this.clickMessage = error.json
+        );
+  }
+
+  getPersons() {
+    return this.http.get<Person[]>("/person/all").subscribe(
+        response => this.persons = response,
+        error => this.clickMessage = error.json
+    )
+  }
 }
 
 export interface DemoResponse {
   text: string;
+}
+
+export class Person {
+  name = '';
+  age = '';
+
+  constructor(name: string, age: string) {
+    this.name = name
+    this.age = age
+  }
 }

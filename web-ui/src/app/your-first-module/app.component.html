@@ -1,15 +1,20 @@
-<div style="text-align: center;"><strong>  {{ title }}</strong> is running!</div>
+<div style="text-align: center;"><strong> {{ title }} </strong> is running!</div>
 
 <div class="content" role="main">
 
-  <h2>Playing with names</h2>
-  <p>
-    Say My Name:
-    <input #nameField>
-    <input #timesField>
-    Times.
-    <button (click)="onSayMyName(nameField.value, timesField.value)">GO!</button>
-  </p>
-  <p style="font-size:50px">{{clickMessage}}</p>
+  <h2>Persisting Persons</h2>
+  <div>Name:<input #nameField></div>
+  <div>Age: <input #ageField></div>
+  <div><button (click)="onPersist(nameField, ageField)">PERSIST!</button></div>
+  <p style="font-size:20px">{{clickMessage}}</p>
 
+  <div><button (click)="getPersons()">SHOW ME ALL OF THEM!</button></div>
+
+  <div>
+    <ul>
+      <li *ngFor="let person of persons">
+        <span>{{person.name}}</span> {{person.age}}
+      </li>
+    </ul>
+  </div>
 </div>

@@ -31,9 +31,18 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+
+	annotationProcessor 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.projectlombok:lombok'
+
+	runtime 'com.h2database:h2'
+
+	//compile 'org.slf4j:slf4j-log4j12'
 	compileOnly 'org.codehaus.groovy:groovy:3.0.4:indy'
 }
 
