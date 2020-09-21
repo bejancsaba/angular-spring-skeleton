@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import { WebSocketAPI } from './WebSocketAPI';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs";
 
@@ -8,12 +9,19 @@ import {Observable} from "rxjs";
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  webSocketAPI: WebSocketAPI;
   persons: Person[];
   title = 'UI demo app';
   clickMessage = '';
 
   constructor(private http: HttpClient) {
+    this.webSocketAPI = new WebSocketAPI(this);
+    this.webSocketAPI._connect();
+  }
+
+  ngOnInit(): void {
+    this.getPersons()
   }
 
   onSayMyName(name: string, times: string) {
@@ -32,7 +40,6 @@ export class AppComponent {
     this.http.post<Person>("/person", new Person(name.value, age.value))
         .subscribe(
             response  => {
-              this.clickMessage = 'Persisted!';
               name.value = '';
               age.value = '';
             },
@@ -45,6 +52,10 @@ export class AppComponent {
         response => this.persons = response,
         error => this.clickMessage = error.json
     )
+  }
+
+  handleMessage(personMessage: string) {
+    this.persons = JSON.parse(personMessage).persons;
   }
 }
 

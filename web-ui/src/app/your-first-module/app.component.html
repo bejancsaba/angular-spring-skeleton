@@ -8,12 +8,12 @@
   <div><button (click)="onPersist(nameField, ageField)">PERSIST!</button></div>
   <p style="font-size:20px">{{clickMessage}}</p>
 
-  <div><button (click)="getPersons()">SHOW ME ALL OF THEM!</button></div>
-
+  <br>
   <div>
+    <p style="font-size:20px">All the names in the DB. List is updated via websocket.</p>
     <ul>
       <li *ngFor="let person of persons">
-        <span>{{person.name}}</span> {{person.age}}
+        <span><b>Name:</b> {{person.name}} <b>Age:</b> {{person.age}}</span>
       </li>
     </ul>
   </div>
