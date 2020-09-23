@@ -1,6 +1,7 @@
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { AppComponent } from './app.component';
+import {AUTH_TOKEN_NAME} from "./constants/app.config";
 
 export class WebSocketAPI {
   webSocketEndPoint: string = '/ws';
@@ -16,7 +17,7 @@ export class WebSocketAPI {
     let ws = new SockJS(this.webSocketEndPoint);
     this.stompClient = Stomp.over(ws);
     const that = this;
-    this.stompClient.connect({}, function (frame) {
+    this.stompClient.connect({"X-Authorization": "Bearer " + localStorage.getItem(AUTH_TOKEN_NAME)}, function (frame) {
       that.stompClient.subscribe(that.topic, function (message) {
         that.onMessageReceived(message);
       });

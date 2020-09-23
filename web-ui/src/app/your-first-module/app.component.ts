@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { WebSocketAPI } from './WebSocketAPI';
 import { HttpParams, HttpClient } from '@angular/common/http';
-import {Observable} from "rxjs";
+import {AuthJwtServerProvider} from "./services/auth-jwt.service";
 
 @Component({
   selector: 'app-root',
@@ -14,10 +14,12 @@ export class AppComponent implements OnInit{
   persons: Person[];
   title = 'UI demo app';
   clickMessage = '';
+  userName = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authProvider: AuthJwtServerProvider) {
     this.webSocketAPI = new WebSocketAPI(this);
     this.webSocketAPI._connect();
+    this.userName = authProvider.getIdentity().sub;
   }
 
   ngOnInit(): void {

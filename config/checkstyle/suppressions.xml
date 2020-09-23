@@ -6,4 +6,5 @@
 
 <suppressions>
     <suppress checks="SummaryJavadocCheck" files="\.java"/>
+    <suppress checks="LineLength" files="LoginController.java"/>
 </suppressions>
