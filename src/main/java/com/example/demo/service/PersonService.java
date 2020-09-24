@@ -29,6 +29,10 @@ public class PersonService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
     private PersonModel toModel(PersonEntity entity) {
         return PersonModel.builder().name(entity.getName()).age(entity.getAge()).build();
     }

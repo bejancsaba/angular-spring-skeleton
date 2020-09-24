@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { WebSocketAPI } from './WebSocketAPI';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import {AuthJwtServerProvider} from "./services/auth-jwt.service";
+import {AclService} from "./services/acl.service";
 
 @Component({
   selector: 'app-root',
@@ -11,13 +12,16 @@ import {AuthJwtServerProvider} from "./services/auth-jwt.service";
 })
 export class AppComponent implements OnInit{
   webSocketAPI: WebSocketAPI;
+  topic: string = "/topic/persons";
   persons: Person[];
+  displayedColumns: string[] = ['name', 'age'];
   title = 'UI demo app';
   clickMessage = '';
   userName = '';
 
-  constructor(private http: HttpClient, private authProvider: AuthJwtServerProvider) {
-    this.webSocketAPI = new WebSocketAPI(this);
+
+  constructor(private http: HttpClient, private authProvider: AuthJwtServerProvider, private aclService: AclService) {
+    this.webSocketAPI = new WebSocketAPI(this.topic, x => this.handleMessage(x));
     this.webSocketAPI._connect();
     this.userName = authProvider.getIdentity().sub;
   }
@@ -58,6 +62,10 @@ export class AppComponent implements OnInit{
 
   handleMessage(personMessage: string) {
     this.persons = JSON.parse(personMessage).persons;
+  }
+
+  isAdmin(): boolean {
+    return this.aclService.hasRole('create');
   }
 }
 

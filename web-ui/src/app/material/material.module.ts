@@ -5,15 +5,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
     exports: [
         MatFormFieldModule,
+        MatButtonModule,
         MatCardModule,
         MatDialogModule,
         MatIconModule,
         MatInputModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatTableModule
     ]
 })
 export class MaterialModule {

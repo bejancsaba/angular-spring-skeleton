@@ -16,11 +16,13 @@ import { AuthJwtServerProvider } from "./your-first-module/services/auth-jwt.ser
 import {PageAccessGuard} from "./your-first-module/services/page-access-guard.service";
 import {UrlCacheService} from "./your-first-module/services/url-cache.service";
 import {JwtInterceptor} from "./your-first-module/services/jwt-interceptor";
+import {TopicComponent} from "./your-first-module/topic.component";
 
 @NgModule({
   declarations: [
     EntryComponent,
     LoginComponent,
+    TopicComponent,
     AppComponent
   ],
   exports: [

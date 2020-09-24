@@ -7,9 +7,11 @@ export class WebSocketAPI {
   webSocketEndPoint: string = '/ws';
   topic: string = "/topic/persons";
   stompClient: any;
-  appComponent: AppComponent;
-  constructor(appComponent: AppComponent){
-    this.appComponent = appComponent;
+  messageHandlerFunction: Function;
+
+  constructor(topic: string, messageHandlerFunction: Function){
+    this.topic = topic;
+    this.messageHandlerFunction = messageHandlerFunction;
   }
 
   _connect() {
@@ -50,6 +52,6 @@ export class WebSocketAPI {
 
   onMessageReceived(message) {
     console.log("Message Recieved from Server :: " + message);
-    this.appComponent.handleMessage(message.body);
+    this.messageHandlerFunction.apply(this, [message.body]);
   }
 }

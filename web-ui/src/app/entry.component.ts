@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-entry',
   template: `
-        <button style="float:right" *ngIf=user.isAuthenticated() (click)=logout()>Logout {{sub}}</button>
+        <button mat-raised-button style="position:absolute;right: 30px" *ngIf=user.isAuthenticated() (click)=logout()>Logout {{sub}}</button>
         <router-outlet></router-outlet>`
 })
 export class EntryComponent implements OnInit {
@@ -18,7 +18,7 @@ export class EntryComponent implements OnInit {
 
   logout() {
     this.loginService.logout();
-    this.router.navigate(["/"]);
+    this.router.navigate(["/login"]);
   }
 
   get sub() {
